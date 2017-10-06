@@ -86,9 +86,19 @@ element Truss2D $tag {$node_tag...} $material_tag $area [$nonlinear_switch] [$co
 
 The last three switches control the nonlinear behavior. Here we do not need to consider nonlinear geometry. By default, it is turned off. Please check the commands manual for each command definition.
 
+### Step
+
+Very similar to the approach used by ABAQUS, **suanPan** also defines the analysis based on steps. By using `step` command, we can define a static analysis.
+
+``` text
+step static 1
+```
+
+The above command defines a static step with tag 1. The time period of this step is by default $$1$$.
+
 ### Fix
 
-We have defined nodes and material, and the element required. Now we can apply the boundary conditions and loads. Assume node 1 is pinned and node 2 is roller supported. we can use `fix` to fix target DoFs.
+We have defined nodes, material and the element required. Now we can apply the boundary conditions and loads. Assume node 1 is pinned and node 2 is roller supported, we can use `fix` to fix target DoFs.
 
 ``` text
 fix 1 1 1
@@ -107,16 +117,6 @@ cload 1 0 25 1 2
 
 As the system is solved incrementally, we also need to define the relationship between the load magnitude and pseudo time. Here we simply assume it is linear. The above command defines a concentrated load with tag 1, using amplitude 0, the magnitude of this load is $$25$$. The load is applied on DoF 1 of node 2. The tag 0 for amplitude is an indicator to inform the solver to use a linear amplitude.
 
-### Step
-
-Very similar to the approach used by ABAQUS, **suanPan** also defines the analysis based on steps. By using `step` command, we can define a static analysis.
-
-``` text
-step static 1
-```
-
-The above command defines a static step with tag 1. The time period of this step is by default $$1$$.
-
 ### Analyze
 
 Everything is ready, now we could use `analyze` to run the analysis. If required, we can use `peek` command to check the result.
@@ -133,7 +133,7 @@ The analytical result can be easily computed.
 
 $$\begin{gather} \Delta{}U=\dfrac{P}{EA}\cdot{}l=\dfrac{25}{42\cdot27}\cdot{}1.6=0.0352734\end{gather}$$
 
-The output of `peek` will be directly printed on the screen. The complete model is summarized as follows
+The output of `peek` will be directly printed on the screen. The complete model is summarized as follows.
 
 ``` text
 +--------------------------------------------------+
@@ -149,10 +149,10 @@ suanPan --> node 1 0 0
 suanPan --> node 2 1.6 0
 suanPan --> material Elastic1D 1 42
 suanPan --> element Truss2D 1 1 2 1 27
+suanPan --> step static 1
 suanPan --> fix 1 1 1
 suanPan --> fix 2 2 1 2
 suanPan --> cload 1 0 25 1 2
-suanPan --> step static 1
 suanPan --> analyze
 suanPan --> peek node 2
 Node 2:
@@ -172,5 +172,7 @@ Some Notes
 ----------
 
 Now you have run the first model with suanPan. If you are familiar with the syntax of OpenSees, you may find that the command styles are very similar. You can easily adapt existing OpenSees models to suanPan models.
+
+Some may find the feedback information of the execution of every command is annoying. So suanPan does not print anything no matter the command succeeds or fails. Users can use debug version to get more feedbacks from the program.
 
 In the next post, the basic structure of an input file will be introduced.
