@@ -1,12 +1,12 @@
 Input File
 ==========
 
-It is not very efficient to develop the model in CLI mode, people prefer something similar to script or batch file. As like many other FEM packages, suanPan also allows the model be defined in input files.
+It is not very efficient to develop models in CLI mode, people prefer something similar to scripts or batch files. As like many other FEM packages, suanPan also allows users to define models with input files.
 
 Encoding and Convention
 -----------------------
 
-The input files are no more than plain text files. Comments are supported within the input file. Any line starts with sharp symbol `#` indicates a comment line. There is no extension requirement, but conventionally, suanPan picks `.supan` as the suffix to indicate the file is a suanPan model. This is not compulsory, though.
+The input files are no more than plain texts. Comments are supported within the input file. Any line starts with the sharp symbol `#` indicates a comment line. There is no extension requirement, but conventionally, suanPan picks `.supan` as the suffix to indicate the file is a suanPan model input file. This is not compulsory, though.
 
 To run the input file, there are two approaches. Users can directly assign an input file as the program starting argument.
 
