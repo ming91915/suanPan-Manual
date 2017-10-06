@@ -81,7 +81,7 @@ element Truss2D 1 1 2 1 27
 The above command simply defines a 2D truss element with tag 1 connecting node 1 and node 2, using the material model 1 and has an area of $$27$$. Different commands may have different definitions so may need different parameters. Some commands have default values that do not need to be explicitly claimed. The `Truss2D` element has a full definition
 
 ``` text
-element Truss2D $$tag {$$node_tag...} $$material_tag $$area [$$nonlinear_switch] [$$constant_area_switch] [$$log_strain_switch]
+element Truss2D $tag {$node_tag...} $material_tag $area [$nonlinear_switch] [$constant_area_switch] [$log_strain_switch]
 ```
 
 The last three switches control the nonlinear behavior. Here we do not need to consider nonlinear geometry. By default, it is turned off. Please check the commands manual for each command definition.
